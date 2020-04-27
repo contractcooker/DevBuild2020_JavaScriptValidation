@@ -1,0 +1,188 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model DevBuild2020_JavaScriptValidation.Models.User
+
+@{
+    ViewData["Title"] = "UserIndex";
+}
+
+<style>
+    .red {
+        color: red;
+    }
+
+    .red-bg {
+        background-color: #FF9999;
+    }
+</style>
+
+<h1>User Index</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index" method="post" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label class="control-label" for="FirstName" id="FirstNameLabel">First Name</label>
+                <input class="form-control" type="text" id="FirstName" name="FirstName" value="" />
+                <span class="text-danger field-validation-valid" id="FirstNameFeedback"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="LastName" id="LastNameLabel">Last Name</label>
+                <input class="form-control" type="text" id="LastName" name="LastName" value="" />
+                <span class="text-danger field-validation-valid" id="LastNameFeedback"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="Email" id="EmailLabel">Email</label>
+                <input class="form-control" type="text" id="Email" name="Email" value="" />
+                <span class="text-danger field-validation-valid" id="EmailFeedback"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="Password" id="PasswordLabel">Password</label>
+                <input class="form-control" type="text" id="Password" name="Password" value="" />
+                <span class="text-danger field-validation-valid" id="PasswordFeedback"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="ConfirmPassword" id="ConfirmPasswordLabel">Confirm Password</label>
+                <input class="form-control" type="text" id="ConfirmPassword" name="ConfirmPassword" value="" />
+                <span class="text-danger field-validation-valid" id="ConfirmPasswordFeedback"></span>
+            </div>
+
+            <div id="Feedback"></div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function validateForm() {
+    let result = validateFirstName() & validateLastName() & validateEmail() & validatePassword() & confirmPassword();
+
+        if (!result) {
+            document.querySelector("#Feedback").innerHTML = "Your form has errors. See above.";
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function validateFirstName() {
+        let name = document.querySelector("#FirstName").value;
+        let warning = '';
+
+        if (!name || name.length < 3) {
+            warning += 'Name is empty or too short. ';
+        } 
+
+
+        if (warning == '') {
+            document.querySelector("#FirstNameLabel").classList.remove('red');
+            document.querySelector("#FirstName").classList.remove('red-bg');
+            document.querySelector("#FirstNameFeedback").innerHTML = '';
+            return true;
+        } else {
+            //display the warning in the span set up for it
+            document.querySelector("#FirstNameFeedback").innerHTML = warning;
+            //add a CSS class to an element
+            document.querySelector("#FirstName").classList.add('red-bg');
+            document.querySelector("#FirstNameLabel").classList.add('red');
+            return false;
+        }
+    }
+
+    function validateLastName() {
+        let name = document.querySelector("#LastName").value;
+        let warning = '';
+
+        if (!name || name.length < 3) {
+            warning += 'Name is empty or too short. ';
+        } 
+
+        if (warning == '') {
+            document.querySelector("#LastNameLabel").classList.remove('red');
+            document.querySelector("#LastName").classList.remove('red-bg');
+            document.querySelector("#LastNameFeedback").innerHTML = '';
+            return true;
+        } else {
+            //display the warning in the span set up for it
+            document.querySelector("#LastNameFeedback").innerHTML = warning;
+            //add a CSS class to an element
+            document.querySelector("#LastName").classList.add('red-bg');
+            document.querySelector("#LastNameLabel").classList.add('red');
+            return false;
+        }
+            
+        
+    }
+    function validateEmail() {
+        let name = document.querySelector("#Email").value;
+        let warning = '';
+
+        if (!name || name.length < 3) {
+            warning += 'Email is empty or too short. ';
+        }
+
+        if (warning == '') {
+            document.querySelector("#EmailLabel").classList.remove('red');
+            document.querySelector("#Email").classList.remove('red-bg');
+            document.querySelector("#EmailFeedback").innerHTML = '';
+            return true;
+        } else {
+            //display the warning in the span set up for it
+            document.querySelector("#EmailFeedback").innerHTML = warning;
+            //add a CSS class to an element
+            document.querySelector("#Email").classList.add('red-bg');
+            document.querySelector("#EmailLabel").classList.add('red');
+            return false;
+        }
+
+
+    }
+    function validatePassword() {
+        let name = document.querySelector("#Password").value;
+        let warning = '';
+
+        if (!name || name.length < 3) {
+            warning += 'Password is empty or too short. ';
+        }
+
+        if (warning == '') {
+            document.querySelector("#PasswordLabel").classList.remove('red');
+            document.querySelector("#Password").classList.remove('red-bg');
+            document.querySelector("#PasswordFeedback").innerHTML = '';
+            return true;
+        } else {
+            //display the warning in the span set up for it
+            document.querySelector("#PasswordFeedback").innerHTML = warning;
+            //add a CSS class to an element
+            document.querySelector("#Password").classList.add('red-bg');
+            document.querySelector("#PasswordLabel").classList.add('red');
+            return false;
+        }
+
+
+    }
+    function confirmPassword() {
+        let name = document.querySelector("#Password").value;
+        let name2 = document.querySelector("#ConfirmPassword").value;
+        let warning = '';
+
+        if (name !== name2) {
+            warning += 'Passwords do not match';
+        }
+
+        if (warning == '') {
+
+        }
+
+        return true;
+    }
+
+
+
+</script>
