@@ -60,7 +60,7 @@ function validateLastName() {
 function validateEmail() {
     let mail = document.querySelector("#Email").value;
     let warning = '';
-    if (!/^\w+([\.-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
         warning += 'invalid email';
     }
     if (warning == '') {
