@@ -142,7 +142,7 @@
         
     }
     function validatePassword() {
-        let name = document.querySelector("#Password").value;
+        let name = document.querySelector("#Password").value;        
         let warning = '';
 
         if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/.test(name)) {
@@ -175,10 +175,20 @@
         }
 
         if (warning == '') {
-
+            document.querySelector("#ConfirmPasswordLabel").classList.remove('red');
+            document.querySelector("#ConfirmPassword").classList.remove('red-bg');
+            document.querySelector("#ConfirmPasswordFeedback").innerHTML = '';
+            return true;
+        } else {
+            //display the warning in the span set up for it
+            document.querySelector("#ConfirmPasswordFeedback").innerHTML = warning;
+            //add a CSS class to an element
+            document.querySelector("#ConfirmPassword").classList.add('red-bg');
+            document.querySelector("#ConfirmPasswordLabel").classList.add('red');
+            return false;
         }
 
-        return true;
+        
     }
 
 
